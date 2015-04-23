@@ -41,3 +41,9 @@ and the package has been minified. [This is not the case just yet.]
 The original license file is included for your reference.
 
 CodeMirror can be found at http://codemirror.net/
+
+History
+-------
+
+This project is a fork of Matthew Schinckel's project
+at http://bitbucket.org/schinckel/django-python-code-field/.

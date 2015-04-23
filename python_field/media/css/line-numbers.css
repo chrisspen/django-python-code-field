@@ -1,5 +1,5 @@
 
-.CodeMirror-line-numbers {
+.CodeMirror-line-numbers{
   width: 2.2em;
   color: #aaa;
   background-color: #eee;
@@ -9,4 +9,8 @@
   font-family: monospace;
   font-size: 10pt;
   line-height: 1.1em;
+}
+
+.CodeMirror-wrapping{
+    top:2em; /* Don't overlap Django admin's field labels. */
 }
