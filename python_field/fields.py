@@ -12,7 +12,7 @@ class PythonCodeWidget(forms.Textarea):
             value = ""
         if attrs is None:
             attrs = {}
-        if attrs.has_key('class'):
+        if 'class' in attrs:
             attrs['class'] += " python-code"
         else:
             attrs['class'] = "python-code"
@@ -44,21 +44,19 @@ class PythonCodeFormField(forms.CharField):
         if not value:
             return
         
-        if isinstance(value, basestring):
+        if isinstance(value, str):
             try:
                 value = value.replace('\r', '')
                 compile(value, "<string>", 'exec')
-            except SyntaxError, arg:
-                raise forms.ValidationError(u'Syntax Error: %s' % unicode(arg))
+            except SyntaxError as arg:
+                raise forms.ValidationError('Syntax Error: %s' % str(arg))
             return value
 
-class PythonCodeField(models.TextField):
+class PythonCodeField(models.TextField, metaclass=models.SubfieldBase):
     """
     A field that will ensure that data that is entered into it is syntactically
     valid python code.
     """
-    
-    __metaclass__ = models.SubfieldBase
     description = "Python Source Code"
     
     def formfield(self, **kwargs):
