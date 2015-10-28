@@ -7,3 +7,6 @@ MANIFEST
 dist
 .project
 /.pydevproject
+
+# ignore pycharm files
+.idea
