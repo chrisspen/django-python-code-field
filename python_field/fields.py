@@ -66,6 +66,6 @@ class PythonCodeField(models.TextField):
     
 try:
     from south.modelsinspector import add_introspection_rules
-    add_introspection_rules([], ['^python_field\.fields\.PythonCodeField'])
+    add_introspection_rules([], [r'^python_field\.fields\.PythonCodeField'])
 except ImportError:
     pass
