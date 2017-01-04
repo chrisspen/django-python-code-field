@@ -2,6 +2,10 @@ import django
 from django.db import models
 from django import forms
 
+import six
+
+unicode = six.text_type # pylint: disable=redefined-builtin
+
 class PythonCodeWidget(forms.Textarea):
     def render(self, name, value, attrs=None):
         """
@@ -45,7 +49,7 @@ class PythonCodeFormField(forms.CharField):
         if not value:
             return
         
-        if isinstance(value, basestring):
+        if isinstance(value, six.string_types):
             try:
                 value = value.replace('\r', '')
                 compile(value, "<string>", 'exec')
