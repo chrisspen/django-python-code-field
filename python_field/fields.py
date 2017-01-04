@@ -1,3 +1,4 @@
+import django
 from django.db import models
 from django import forms
 
@@ -48,8 +49,8 @@ class PythonCodeFormField(forms.CharField):
             try:
                 value = value.replace('\r', '')
                 compile(value, "<string>", 'exec')
-            except SyntaxError, arg:
-                raise forms.ValidationError(u'Syntax Error: %s' % unicode(arg))
+            except SyntaxError as e:
+                raise forms.ValidationError(u'Syntax Error: %s' % unicode(e))
             return value
 
 class PythonCodeField(models.TextField):
@@ -58,11 +59,21 @@ class PythonCodeField(models.TextField):
     valid python code.
     """
     
-    __metaclass__ = models.SubfieldBase
+    # SubfieldBase was removed in Django 1.10.
+    # http://stackoverflow.com/a/36744699/247542
+    if django.VERSION < (1, 10, 0):
+        __metaclass__ = models.SubfieldBase
+        
     description = "Python Source Code"
     
     def formfield(self, **kwargs):
         return super(PythonCodeField, self).formfield(form_class=PythonCodeFormField, **kwargs)
+        
+    def from_db_value(self, value, expression, connection, context):
+        return value
+
+    def to_python(self, value):
+        return value
     
 try:
     from south.modelsinspector import add_introspection_rules
