@@ -20,7 +20,7 @@ setup(
     version=python_field.__version__,
     description="Store python source code (syntax checked) in database.",
     url="https://github.com/chrisspen/django-python-code-field/",
-    author="Chris Spencer",
+    author="Matthew Schinckel, maintained by Chris Spencer",
     author_email="chrisspen@gmail.com",
     packages=find_packages(),
     #https://pypi.python.org/pypi?%3Aaction=list_classifiers
